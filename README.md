@@ -171,7 +171,7 @@ We welcome contributions from the community. If you'd like to contribute, please
 2. Fork the repository.
 3. Create a new branch for your feature or bug fix.
 4. Make your changes and commit them.
-5. Push your branch and create a pull request.
+5. Push your branch and create a pull request **`only to development branch`**.
 6. Wait for review & acceptance.
 
 Please ensure your code follows the project's coding standards and very well tested.
