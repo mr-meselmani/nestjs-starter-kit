@@ -5,7 +5,7 @@
 # NestJS Starter Kit 🚀
 
 <div align="center">
-  <img src="https://github.com/mr-meselmani/docker-sample/blob/master/assets/words-github-banner.jpg?raw=true" alt="Project Banner" style="width:100%;"/>
+  <img src="https://github.com/mr-meselmani/nestjs-starter-kit/blob/master/public/words-github-banner.jpg?raw=true" alt="Project Banner" style="width:100%;"/>
 </div>
 
 </br>
@@ -13,7 +13,7 @@
 # Architecture
 
 <div align="center">
-  <img src="https://github.com/mr-meselmani/docker-sample/blob/master/assets/nestjs-starter-kit-architecture.jpg?raw=true" alt="Project Banner" style="width:100%;"/>
+  <img src="https://github.com/mr-meselmani/nestjs-starter-kit/blob/master/public/nestjs-starter-kit-architecture.jpg?raw=true" alt="Project Banner" style="width:100%;"/>
 </div>
 
 </br>
@@ -197,7 +197,7 @@ Your contributions will help ensure the continued development and maintenance of
 ## Current ERD
 
 <div align="center">
-  <img src="https://github.com/mr-meselmani/docker-sample/blob/master/assets/current-erd.png?raw=true" alt="Project Banner" style="width:100%;"/>
+  <img src="https://github.com/mr-meselmani/nestjs-starter-kit/blob/master/public/current-erd.png?raw=true" alt="Project Banner" style="width:100%;"/>
 </div>
 
 ---
