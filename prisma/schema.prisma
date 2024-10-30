@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int        @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String     @unique
+  newEmail    String?
+  image       String?    @default("https://avatars.dicebear.com/api/initials/anonymous.svg")
+  dateOfBirth DateTime?
+  type        UserType   @default(READER)
+  status      UserStatus @default(UNVERIFIED)
+  bio         String?
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  post          Post[]
+  administrator Administrator?
+}
+
+model Administrator {
+  userId Int @id @unique
+  roleId Int
+
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @updatedAt @db.Timestamp(6)
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Role {
+  id       Int        @id @default(autoincrement())
+  name     ROLES_ENUM @unique
+  priority Int
+
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @updatedAt @db.Timestamp(6)
+
+  administrator Administrator[]
+}
+
+model Password {
+  id     String @id @default(uuid()) @db.Uuid
+  hash   String @db.VarChar(512)
+  salt   String @db.VarChar(512)
+  userId Int    @unique
+
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @updatedAt @db.Timestamp(6)
+}
+
+model RefreshToken {
+  id     String @id @default(uuid()) @db.Uuid
+  hash   String @db.VarChar(512)
+  salt   String @db.VarChar(512)
+  userId Int    @unique
+
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @updatedAt @db.Timestamp(6)
+}
+
+model OTPAndSecret {
+  id                    String @id @default(uuid()) @db.Uuid
+  secret                String @db.VarChar(512)
+  email                 String @unique
+  otpCodeRetryCount     Int    @default(0)
+  otpSecretRequestCount Int    @default(0)
+
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @updatedAt @db.Timestamp(6)
+}
+
+model Post {
+  id      Int    @id @default(autoincrement())
+  userId  Int
+  title   String
+  content String
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  DISABLED
+  UNVERIFIED
+}
+
+enum ROLES_ENUM {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
+  SUPPORT
+}
+
+enum UserType {
+  READER
+  AUTHOR
+}

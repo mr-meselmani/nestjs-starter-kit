@@ -1,0 +1,16 @@
+export enum AUTH_PATHS {
+  PATH_PREFIX = 'auth',
+  REGISTER = 'register',
+  LOGIN = 'login',
+  LOGOUT = 'logout',
+  REFRESH_TOKEN = 'refresh-token',
+  POST_SEND_VERIFY_EMAIL_FOR_NEW_USER = 'send-verify-email',
+  POST_VERIFY_EMAIL_FOR_NEW_USER = 'verify-email',
+  POST_SEND_VERIFY_NEW_EMAIL = 'send-verify-new-email',
+  POST_VERIFY_NEW_EMAIL = 'verify-new-email',
+  PUT_CHANGE_PASSWORD = 'change-password',
+  PUT_CHANGE_EMAIL = 'change-email',
+  POST_SEND_OTP_EMAIL = 'send-otp-email',
+  POST_VERIFY_OTP = 'verify-otp',
+  POST_RESET_PASSWORD = 'reset-password',
+}
