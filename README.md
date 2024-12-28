@@ -180,15 +180,9 @@ Please ensure your code follows the project's coding standards and very well tes
 
 ## Sponsorship
 
-If you find this project helpful and would like to support its development, please consider sponsoring this project. You can send contributions using the following cryptocurrencies:
+If you find this project helpful and would like to support its development, please consider sponsoring this project. You can send contributions using the following cryptocurrency:
 
-- **Bitcoin NativeSegwit (BTC)**: **`bc1qyveg0kx7jthyr6dvpaz8fl63g9cvwwy4g56wwn`**
-
-- **Ethereum (ETH)**: **`0x7ff0b2e075e8969c2d7554bc6e86bb2f5b75cf6f`**
-
-- **Tron (TRX)**: **`TT6s8rx7RyYB7yncNVE2nzTbkdQaoYZAE7`**
-
-- **Solana (SOL)**: **`8Do6X7EU7jswKt55PD5Lm6sygLoYj3LvtSRVJE7kS3et`**
+- **Solana**: **`BqVeXXf8ddtG3rEvfqHCBB981FWpbkssytpYo7KH3nrx`**
 
 Your contributions will help ensure the continued development and maintenance of this starter kit. Thank you for your support 🤍
 
