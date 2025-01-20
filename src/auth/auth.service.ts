@@ -208,60 +208,6 @@ export class AuthService {
     };
   }
 
-  // Validate user
-  public async validateUser({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<User> {
-    try {
-      const user = await this.userService.getUserByEmailOrNull(email);
-
-      if (!user) {
-        return Promise.reject(
-          new UnauthorizedException(
-            'LocalStrategy: UnAuthorized validateUser1',
-          ),
-        );
-      }
-
-      const userPassword = await this.passwordService.getUserPasswordbyIdOrNull(
-        user.id,
-      );
-
-      if (!userPassword) {
-        return Promise.reject(
-          new UnauthorizedException(
-            'LocalStrategy: UnAuthorized validateUser2',
-          ),
-        );
-      }
-
-      const isPasswordCorrect = HashService.compareHash({
-        tobeHashed: password,
-        storedHash: userPassword.hash,
-        storedSalt: userPassword.salt,
-      });
-
-      if (!isPasswordCorrect) {
-        return Promise.reject(
-          new UnauthorizedException(
-            'LocalStrategy: UnAuthorized validateUser3',
-          ),
-        );
-      }
-
-      return user;
-    } catch (e) {
-      Logger.error(e, 'LocalStrategy: UnAuthorized validateUser4');
-      return Promise.reject(
-        new UnauthorizedException('LocalStrategy: UnAuthorized validateUser4'),
-      );
-    }
-  }
-
   // Send verify email for new user
   public async sendVerifyEmailForNewUser({
     email,

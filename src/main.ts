@@ -7,6 +7,7 @@ import { SWAGGER_API_ENDPOINT } from './_middlewares/routes';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT ?? 3000;
 
   // https://docs.nestjs.com/security/cors
   app.enableCors({
@@ -50,6 +51,6 @@ async function bootstrap(): Promise<void> {
     customCss: theme.getBuffer(SwaggerThemeNameEnum.NORD_DARK),
   });
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
