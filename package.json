@@ -40,6 +40,7 @@
     "aws"
   ],
   "scripts": {
+    "app:docs": "pnpm dlx @compodoc/compodoc -p tsconfig.json -s",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -78,6 +79,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.26",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
