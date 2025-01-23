@@ -18,3 +18,6 @@ res:
 
 lint:
 	pnpm run lint
+
+docs:
+	pnpm run app:docs
