@@ -55,6 +55,7 @@ Welcome to the NestJS Starter Kit 🚀 This starter is opensource and provides a
 - **Docker**: Containerization abstract the setup tools on any local machine and help in deployment.
 - **Resend Email Service**: A fast & cheap email service to use in your project.
 - **Modular Architecture**: Organized code structure for better separation of concerns.
+- **Auto Generated Local Docs**: Using [Compodoc](https://github.com/compodoc/compodoc/), after installation run this command: `pnpm dlx @compodoc/compodoc -p tsconfig.json -s`
 
 ---
 
