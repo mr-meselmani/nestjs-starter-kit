@@ -11,7 +11,7 @@ async function bootstrap(): Promise<void> {
 
   // https://docs.nestjs.com/security/cors
   app.enableCors({
-    origin: ['http://localhost:3000'], // Allowed origin(s)
+    origin: ['http://localhost:3000', 'http://localhost:3001'], // Allowed origin(s)
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
   });
