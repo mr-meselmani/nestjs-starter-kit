@@ -250,8 +250,8 @@ export class AuthService {
 
     const sendEmailSubPath =
       apiEndPoint === AUTH_PATHS.POST_VERIFY_EMAIL_FOR_NEW_USER
-        ? `${apiEndPoint}-${type.toLowerCase()}`
-        : apiEndPoint;
+        ? `${apiEndPoint}`
+        : null;
 
     await this.emailService.sendEmailOrThrow({
       to: [email],

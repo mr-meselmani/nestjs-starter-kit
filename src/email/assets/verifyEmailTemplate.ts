@@ -50,7 +50,7 @@ export const verifyEmailEdm = (href: string): string => {
       <div class="container">
           <h1>Verify Email</h1>
           <p>To verify your email address, please click the link below:</p>
-          <a href="${process.env.FRONTEND_BASE_URL}/${href}">${href}</a>
+          <a href="${href}">${href}</a>
           <p>&copy; ${year} Your Company Name. All rights reserved.</p>
       </div>
   </body>
