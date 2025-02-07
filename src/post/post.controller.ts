@@ -43,7 +43,6 @@ export class PostController {
 
   // Get all posts
   @Get()
-  @CustomRole([ALL_ROLES.SUPER_ADMIN])
   public async getAllPosts(): Promise<IApiResponse<post[]>> {
     return {
       message: 'success',

@@ -19,7 +19,7 @@ model User {
   lastName    String
   email       String     @unique
   newEmail    String?
-  image       String?    @default("https://avatars.dicebear.com/api/initials/anonymous.svg")
+  image       String?    @default("https://ui.shadcn.com/avatars/shadcn.jpg")
   dateOfBirth DateTime?
   type        UserType   @default(READER)
   status      UserStatus @default(UNVERIFIED)
