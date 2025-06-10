@@ -183,7 +183,7 @@ Please ensure your code follows the project's coding standards and very well tes
 
 If you find this project helpful and would like to support its development, please consider sponsoring this project. You can send contributions using the following cryptocurrency:
 
-- **Solana**: **`BqVeXXf8ddtG3rEvfqHCBB981FWpbkssytpYo7KH3nrx`**
+- **Solana**: **`HevTaAxB36eqHFhLEYcDnZJtySBebQUbaxBBaau5qyin`**
 
 Your contributions will help ensure the continued development and maintenance of this starter kit. Thank you for your support 🤍
 
