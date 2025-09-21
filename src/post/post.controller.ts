@@ -9,15 +9,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PostService } from './post.service';
-import { CreateOrUpdatePostBodyDto } from '@/_validators/post/post.dto';
-import { CurrentSystemUser } from '@/_decorators/getters/currentSystemUser.decorator';
-import { ICurrentSystemUser } from '@/_validators/auth/auth.model';
-import { IApiResponse } from '@/_validators/global/global.model';
+import { CreateOrUpdatePostBodyDto } from 'src/_validators/post/post.dto';
+import { CurrentSystemUser } from 'src/_decorators/getters/currentSystemUser.decorator';
+import type { ICurrentSystemUser } from 'src/_validators/auth/auth.model';
+import { IApiResponse } from 'src/_validators/global/global.model';
 import { Post as post } from '@prisma/client';
-import { GlobalIdParamDto } from '@/_validators/global/global.dto';
-import { RolesGuard } from '@/_guards/roles.guard';
-import { ALL_ROLES, CustomRole } from '@/_decorators/setters/roles.decorator';
-import { POST_PATHS } from '@/_paths/post';
+import { GlobalIdParamDto } from 'src/_validators/global/global.dto';
+import { RolesGuard } from 'src/_guards/roles.guard';
+import { POST_PATHS } from 'src/_paths/post';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags(POST_PATHS.PATH_PREFIX)

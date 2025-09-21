@@ -4,9 +4,9 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { UserClient } from './user.client';
-import { PasswordService } from '@/password/password.service';
+import { PasswordService } from 'src/password/password.service';
 import { User } from '@prisma/client';
-import { IGetUserByIdResponse } from '@/_validators/user/user.model';
+import { IGetUserByIdResponse } from 'src/_validators/user/user.model';
 
 @Injectable()
 export class UserService {

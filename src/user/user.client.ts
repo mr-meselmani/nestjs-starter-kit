@@ -1,5 +1,5 @@
-import { IGetUserByIdResponse } from '@/_validators/user/user.model';
-import { PrismaService } from '@/prisma/prisma.service';
+import { IGetUserByIdResponse } from 'src/_validators/user/user.model';
+import { PrismaService } from 'src/prisma/prisma.service';
 import {
   Injectable,
   InternalServerErrorException,

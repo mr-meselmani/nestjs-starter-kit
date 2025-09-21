@@ -2,12 +2,11 @@
 import {
   IAuthenticatedRequestFromEmailJwt,
   ICurrentSystemUserFromEmailJwt,
-} from '@/_validators/auth/auth.model';
+} from 'src/_validators/auth/auth.model';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const CurrentSystemUserFromEmailJwt = createParamDecorator<
   keyof ICurrentSystemUserFromEmailJwt,
-  ExecutionContext,
   undefined | number | string | IAuthenticatedRequestFromEmailJwt['user']
 >(
   (

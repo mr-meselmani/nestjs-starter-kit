@@ -1,4 +1,4 @@
-import { ICreateOrUpdatePostBody } from '@/_validators/post/post.model';
+import { ICreateOrUpdatePostBody } from 'src/_validators/post/post.model';
 import { Injectable } from '@nestjs/common';
 import { Post, User } from '@prisma/client';
 import { PostClient } from './post.client';

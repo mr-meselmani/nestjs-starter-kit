@@ -1,16 +1,16 @@
-import { USER_PATHS } from '@/_paths/user';
+import { USER_PATHS } from 'src/_paths/user';
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from '@prisma/client';
-import { IApiResponse } from '@/_validators/global/global.model';
+import { IApiResponse } from 'src/_validators/global/global.model';
 import { ApiTags } from '@nestjs/swagger';
-import { CustomSwaggerDecorator } from '@/_decorators/setters/swagger.decorator';
-import { GlobalIdParamDto } from '@/_validators/global/global.dto';
-import { IGetUserByIdResponse } from '@/_validators/user/user.model';
+import { CustomSwaggerDecorator } from 'src/_decorators/setters/swagger.decorator';
+import { GlobalIdParamDto } from 'src/_validators/global/global.dto';
+import { IGetUserByIdResponse } from 'src/_validators/user/user.model';
 import { ZodSerializerDto } from 'nestjs-zod';
-import { GetUserByIdResponseDto } from '@/_validators/user/user.dto';
-import { ALL_ROLES, CustomRole } from '@/_decorators/setters/roles.decorator';
-import { RolesGuard } from '@/_guards/roles.guard';
+import { GetUserByIdResponseDto } from 'src/_validators/user/user.dto';
+import { ALL_ROLES, CustomRole } from 'src/_decorators/setters/roles.decorator';
+import { RolesGuard } from 'src/_guards/roles.guard';
 
 @ApiTags(USER_PATHS.PATH_PREFIX)
 @UseGuards(RolesGuard)

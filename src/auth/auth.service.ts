@@ -9,8 +9,8 @@ import {
   ISendOtpEmailBody,
   ITokens,
   VerifyEmailJwtPayload,
-} from '@/_validators/auth/auth.model';
-import { UserService } from '@/user/user.service';
+} from 'src/_validators/auth/auth.model';
+import { UserService } from 'src/user/user.service';
 import {
   BadRequestException,
   ForbiddenException,
@@ -21,16 +21,16 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { RefreshTokenService } from '@/refresh-token/refresh-token.service';
+import { RefreshTokenService } from 'src/refresh-token/refresh-token.service';
 import { User, UserStatus } from '@prisma/client';
-import { PasswordService } from '@/password/password.service';
-import { HashService } from '@/_utils/hash.util';
-import { AUTH_PATHS } from '@/_paths/auth';
-import { EmailService } from '@/email/email.service';
-import verifyEmailEdm from '@/email/assets/verifyEmailTemplate';
-import { OtpAndSecretService } from '@/otp-and-secret/otp-and-secret.service';
+import { PasswordService } from 'src/password/password.service';
+import { HashService } from 'src/_utils/hash.util';
+import { AUTH_PATHS } from 'src/_paths/auth';
+import { EmailService } from 'src/email/email.service';
+import verifyEmailEdm from 'src/email/assets/verifyEmailTemplate';
+import { OtpAndSecretService } from 'src/otp-and-secret/otp-and-secret.service';
 import { authenticator } from 'otplib';
-import resetPasswordEdm from '@/email/assets/resetPasswordEmailTemplate';
+import resetPasswordEdm from 'src/email/assets/resetPasswordEmailTemplate';
 
 @Injectable()
 export class AuthService {

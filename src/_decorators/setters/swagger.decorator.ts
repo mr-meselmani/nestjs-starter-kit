@@ -1,10 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
+  ApiConsumes,
   ApiCreatedResponse,
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
@@ -16,14 +19,13 @@ import {
   ApiResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { zodToOpenAPI } from 'nestjs-zod';
+import { z } from 'zod';
 
-type ParamSchema = any;
-type QuerySchema = any;
-type ResponseSchema = any;
-type BodySchema = any;
+type ParamSchema = z.ZodSchema<any>;
+type QuerySchema = z.ZodSchema<any>;
+type ResponseSchema = z.ZodSchema<any>;
+type BodySchema = z.ZodSchema<any>;
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export function CustomSwaggerDecorator({
   summary,
   paramDec,
@@ -39,6 +41,7 @@ export function CustomSwaggerDecorator({
   internalErrorDec,
   createdDec,
   statusOK,
+  fileUpload,
 }: {
   paramDec?: {
     paramName: string[] | string;
@@ -62,24 +65,29 @@ export function CustomSwaggerDecorator({
   internalErrorDec?: boolean;
   createdDec?: boolean;
   statusOK?: boolean;
+  fileUpload?: {
+    fieldName: string;
+    description: string;
+    required: boolean;
+  };
   summary?: string;
 }): MethodDecorator {
-  const decorators = [];
-  const multipleParams = [];
+  const decorators: any[] = [];
+  const multipleParams: string[] = [];
 
   if (summary) {
     decorators.push(ApiOperation({ summary }));
   }
 
   // Param Dec
-  if (paramDec) {
+  if (paramDec && paramDec.paramSchema) {
     if (Array.isArray(paramDec.paramName) && paramDec.paramName.length > 0) {
       paramDec.paramName.forEach((param) => {
         multipleParams.push(param);
         decorators.push(
           ApiParam({
             name: param,
-            schema: zodToOpenAPI(paramDec.paramSchema).properties,
+            schema: z.toJSONSchema(paramDec.paramSchema!) as any,
           }),
         );
       });
@@ -89,37 +97,86 @@ export function CustomSwaggerDecorator({
           name: Array.isArray(paramDec.paramName)
             ? paramDec.paramName.join(',')
             : paramDec.paramName,
-          schema: zodToOpenAPI(paramDec.paramSchema).properties,
+          schema: z.toJSONSchema(paramDec.paramSchema) as any,
         }),
       );
     }
   }
 
   // Query Dec
-  if (queryDec) {
-    decorators.push(
-      ApiQuery({
-        name: 'Query',
-        schema: zodToOpenAPI(queryDec.querySchema),
-      }),
-    );
+  if (queryDec && queryDec.querySchema) {
+    const schema = z.toJSONSchema(queryDec.querySchema) as any;
+    if (schema.properties) {
+      Object.keys(schema.properties).forEach((key) => {
+        decorators.push(
+          ApiQuery({
+            name: key,
+            required: schema.required?.includes(key) || false,
+            schema: schema.properties[key],
+            description:
+              schema.properties[key].description || `${key} parameter`,
+          }),
+        );
+      });
+    } else {
+      decorators.push(
+        ApiQuery({
+          name: 'Query',
+          schema: schema,
+        }),
+      );
+    }
   }
 
   // Api Res Dec
-  if (resDec) {
+  if (resDec && resDec.responseSchema) {
     decorators.push(
       ApiResponse({
-        schema: zodToOpenAPI(resDec.responseSchema),
+        schema: z.toJSONSchema(resDec.responseSchema) as any,
       }),
     );
   }
 
   // Body Dec
-  if (bodyDec) {
+  if (bodyDec && bodyDec.payloadSchema) {
     decorators.push(
       ApiBody({
         description: `Payload`,
-        schema: zodToOpenAPI(bodyDec.payloadSchema),
+        schema: z.toJSONSchema(bodyDec.payloadSchema) as any,
+      }),
+    );
+  }
+
+  // File Upload Dec
+  if (fileUpload) {
+    decorators.push(
+      ApiConsumes('multipart/form-data'),
+      ApiBody({
+        description: fileUpload.description,
+        schema: {
+          type: 'object',
+          properties: {
+            [fileUpload.fieldName]: {
+              type: 'string',
+              format: 'binary',
+            },
+            bucket: {
+              type: 'string',
+              example: 'my-bucket',
+            },
+            fileName: {
+              type: 'string',
+              example: 'my-file.jpg',
+            },
+            mimeType: {
+              type: 'string',
+              example: 'image/jpeg',
+            },
+          },
+          required: fileUpload.required
+            ? [fileUpload.fieldName, 'bucket', 'fileName', 'mimeType']
+            : ['bucket', 'fileName', 'mimeType'],
+        },
       }),
     );
   }
@@ -128,7 +185,6 @@ export function CustomSwaggerDecorator({
   if (unauthDec) {
     decorators.push(
       ApiUnauthorizedResponse({
-        status: 401,
         description: `Unauthorized Access`,
       }),
     );
@@ -143,7 +199,6 @@ export function CustomSwaggerDecorator({
   if (forbiddenDec) {
     decorators.push(
       ApiForbiddenResponse({
-        status: 403,
         description: `Forbidden Access`,
       }),
     );
@@ -153,7 +208,6 @@ export function CustomSwaggerDecorator({
   if (notfoundDec) {
     decorators.push(
       ApiNotFoundResponse({
-        status: 404,
         description: `Not Found`,
       }),
     );
@@ -163,7 +217,6 @@ export function CustomSwaggerDecorator({
   if (conflictDec) {
     decorators.push(
       ApiConflictResponse({
-        status: 409,
         description: `Conflict`,
       }),
     );
@@ -173,7 +226,6 @@ export function CustomSwaggerDecorator({
   if (badrequestDec) {
     decorators.push(
       ApiBadRequestResponse({
-        status: 400,
         description: `Bad Request`,
       }),
     );
@@ -183,7 +235,6 @@ export function CustomSwaggerDecorator({
   if (internalErrorDec) {
     decorators.push(
       ApiInternalServerErrorResponse({
-        status: 500,
         description: `Internal server error.`,
       }),
     );
@@ -193,7 +244,6 @@ export function CustomSwaggerDecorator({
   if (createdDec) {
     decorators.push(
       ApiCreatedResponse({
-        status: 201,
         description: `Created successfully`,
       }),
     );
@@ -202,7 +252,6 @@ export function CustomSwaggerDecorator({
   if (statusOK) {
     decorators.push(
       ApiOkResponse({
-        status: 200,
         description: 'Success',
       }),
     );
