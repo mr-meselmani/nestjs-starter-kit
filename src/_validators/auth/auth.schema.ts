@@ -25,9 +25,7 @@ export const registerUserBodySchema: z.ZodSchema<IRegisterUserBody> = z
       .string()
       .min(3, 'must be at least 3 characters')
       .max(12, 'must not exceed 12 characters'),
-    email: z
-      .string()
-      .email(),
+    email: z.string().email(),
     password: z
       .string()
       .min(8, 'must be at least 8 characters')
