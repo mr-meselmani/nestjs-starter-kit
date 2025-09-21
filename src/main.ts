@@ -4,23 +4,20 @@ import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
 import { SWAGGER_API_ENDPOINT } from './_middlewares/routes';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT ?? 3000;
 
   // https://docs.nestjs.com/security/cors
-  app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'], // Allowed origin(s)
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    credentials: true,
-  });
+  app.enableCors();
 
   // https://docs.nestjs.com/security/helmet
   app.use(helmet());
 
   // https://docs.nestjs.com/faq/global-prefix
-  app.setGlobalPrefix('api/v1');
+  // app.setGlobalPrefix('api/v1');
 
   // https://docs.nestjs.com/fundamentals/lifecycle-events#application-shutdown
   app.enableShutdownHooks();
@@ -52,5 +49,8 @@ async function bootstrap(): Promise<void> {
   });
 
   await app.listen(port);
+
+  Logger.debug(`Server is running on port ${port}`);
 }
-bootstrap();
+
+void bootstrap();

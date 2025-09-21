@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PasswordClient } from './password.client';
-import { HashService } from '@/_utils/hash.util';
+import { HashService } from 'src/_utils/hash.util';
 import { Password, User } from '@prisma/client';
 
 @Injectable()

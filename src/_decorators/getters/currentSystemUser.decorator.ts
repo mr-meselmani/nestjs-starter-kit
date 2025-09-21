@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import {
+import type {
   IAuthenticatedRequest,
   ICurrentSystemUser,
-} from '@/_validators/auth/auth.model';
+} from 'src/_validators/auth/auth.model';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const CurrentSystemUser = createParamDecorator<
   keyof ICurrentSystemUser,
-  ExecutionContext,
   ICurrentSystemUser[keyof ICurrentSystemUser] | ICurrentSystemUser
 >(
   (

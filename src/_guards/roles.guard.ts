@@ -1,8 +1,8 @@
 import {
   ALL_ROLES_ENUM,
   ROLES_KEY,
-} from '@/_decorators/setters/roles.decorator';
-import { PrismaService } from '@/prisma/prisma.service';
+} from 'src/_decorators/setters/roles.decorator';
+import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CanActivate,
   ExecutionContext,

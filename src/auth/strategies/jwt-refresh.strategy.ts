@@ -7,7 +7,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import {
   AccessOrRefreshJwtPayloadJwtPayloadDecoded,
   ICurrentSystemUserIdWithRt,
-} from '@/_validators/auth/auth.model';
+} from 'src/_validators/auth/auth.model';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
@@ -20,7 +20,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       ignoreExpiration: false,
       secretOrKey: jwtConstants.jwtRefreshSecret,
       passReqToCallback: true,
-    });
+    } as any);
   }
 
   async validate(
