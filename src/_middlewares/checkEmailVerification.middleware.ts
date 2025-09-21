@@ -1,6 +1,6 @@
-import { IVerifyEmailBody } from '@/_validators/auth/auth.model';
-import { sendVerifyEmailBodySchema } from '@/_validators/auth/auth.schema';
-import { UserService } from '@/user/user.service';
+import { IVerifyEmailBody } from 'src/_validators/auth/auth.model';
+import { sendVerifyEmailBodySchema } from 'src/_validators/auth/auth.schema';
+import { UserService } from 'src/user/user.service';
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { UserStatus } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';

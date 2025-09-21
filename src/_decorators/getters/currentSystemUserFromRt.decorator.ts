@@ -2,12 +2,11 @@
 import {
   IAuthenticatedRequestWithRt,
   ICurrentSystemUserIdWithRt,
-} from '@/_validators/auth/auth.model';
+} from 'src/_validators/auth/auth.model';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const CurrentSystemUserFromRt = createParamDecorator<
   keyof ICurrentSystemUserIdWithRt,
-  ExecutionContext,
   number | string | IAuthenticatedRequestWithRt['user']
 >(
   (

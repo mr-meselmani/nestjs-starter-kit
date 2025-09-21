@@ -18,26 +18,18 @@ import { UserStatus, UserType } from '@prisma/client';
 export const registerUserBodySchema: z.ZodSchema<IRegisterUserBody> = z
   .object({
     firstName: z
-      .string({
-        required_error: 'firstName is required',
-      })
+      .string()
       .min(3, 'must be at least 3 characters')
       .max(12, 'must not exceed 12 characters'),
     lastName: z
-      .string({
-        required_error: 'lastName is required',
-      })
+      .string()
       .min(3, 'must be at least 3 characters')
       .max(12, 'must not exceed 12 characters'),
     email: z
-      .string({
-        required_error: 'email is required',
-      })
+      .string()
       .email(),
     password: z
-      .string({
-        required_error: 'password is required',
-      })
+      .string()
       .min(8, 'must be at least 8 characters')
       .max(32, 'must not exceed 32 characters'),
   })

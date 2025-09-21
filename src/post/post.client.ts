@@ -1,5 +1,5 @@
-import { ICreateOrUpdatePostBody } from '@/_validators/post/post.model';
-import { PrismaService } from '@/prisma/prisma.service';
+import { ICreateOrUpdatePostBody } from 'src/_validators/post/post.model';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Post, Prisma, User } from '@prisma/client';
 
