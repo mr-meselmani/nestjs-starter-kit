@@ -50,12 +50,7 @@ export class AuthController {
 
   // Register
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: RegisterUserBodyDto.schema,
-    },
-    resDec: {
-      responseSchema: RegisterUserResponseDto.schema,
-    },
+    summary: 'Register',
     conflictDec: true,
     createdDec: true,
   })
@@ -73,12 +68,7 @@ export class AuthController {
 
   // Login
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: LoginBodyDto.schema,
-    },
-    resDec: {
-      responseSchema: LoginUserResponseDto.schema,
-    },
+    summary: 'Login',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -96,6 +86,7 @@ export class AuthController {
 
   // Logout
   @CustomSwaggerDecorator({
+    summary: 'Logout',
     authDec: true,
     unauthDec: true,
     statusOK: true,
@@ -113,9 +104,7 @@ export class AuthController {
 
   // Refresh token
   @CustomSwaggerDecorator({
-    resDec: {
-      responseSchema: RefreshTokenResponseDto.schema,
-    },
+    summary: 'Refresh token',
     authDec: true,
     unauthDec: true,
     statusOK: true,
@@ -139,9 +128,7 @@ export class AuthController {
 
   // Send verify email for new user
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: SendVerifyEmailBodyDto.schema,
-    },
+    summary: 'Send verify email for new user',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -158,6 +145,7 @@ export class AuthController {
 
   // Verify email for new user
   @CustomSwaggerDecorator({
+    summary: 'Verify email for new user',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -175,9 +163,7 @@ export class AuthController {
 
   // Change email & send verify new email
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: ChangeEmailDto.schema,
-    },
+    summary: 'Change email & send verify new email',
     authDec: true,
     unauthDec: true,
     statusOK: true,
@@ -198,9 +184,7 @@ export class AuthController {
 
   // Send verify new email
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: SendVerifyNewEmailBodyDto.schema,
-    },
+    summary: 'Send verify new email',
     authDec: true,
     unauthDec: true,
     statusOK: true,
@@ -219,6 +203,7 @@ export class AuthController {
 
   // Verify new email
   @CustomSwaggerDecorator({
+    summary: 'Verify new email',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -240,9 +225,7 @@ export class AuthController {
 
   // Change password
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: ChangePasswordBodyDto.schema,
-    },
+    summary: 'Change password',
     authDec: true,
     unauthDec: true,
     statusOK: true,
@@ -263,9 +246,7 @@ export class AuthController {
 
   // Send otp email
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: SendOtpEmailBodyDto.schema,
-    },
+    summary: 'Send otp email',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -283,9 +264,7 @@ export class AuthController {
 
   // Verify otp
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: VerifyOTPBodyDto.schema,
-    },
+    summary: 'Verify otp',
     statusOK: true,
   })
   @PublicEndpoint()
@@ -305,9 +284,7 @@ export class AuthController {
 
   // Reset password & verify otp
   @CustomSwaggerDecorator({
-    bodyDec: {
-      payloadSchema: ResetPasswordBodyDto.schema,
-    },
+    summary: 'Reset password & verify otp',
     statusOK: true,
   })
   @PublicEndpoint()

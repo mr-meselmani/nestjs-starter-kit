@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3'
 
 services:
   postgres:
     container_name: postgres_container
-    image: postgres:15.4
+    image: postgres:17
     restart: always
     env_file:
       - .env

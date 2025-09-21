@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=20.11.0
-ARG PNPM_VERSION=9.12.2
+ARG NODE_VERSION=22.18.0
+ARG PNPM_VERSION=9.15.0
 ARG NODE_ENV
 
 # Use node image for base image for all stages.

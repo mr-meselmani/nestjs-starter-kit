@@ -39,6 +39,10 @@
     "docker",
     "aws"
   ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "app:docs": "pnpm dlx @compodoc/compodoc -p tsconfig.json -s",
     "build": "nest build",

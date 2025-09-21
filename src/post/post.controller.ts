@@ -18,6 +18,8 @@ import { GlobalIdParamDto } from 'src/_validators/global/global.dto';
 import { RolesGuard } from 'src/_guards/roles.guard';
 import { POST_PATHS } from 'src/_paths/post';
 import { ApiTags } from '@nestjs/swagger';
+import { PublicEndpoint } from 'src/_decorators/setters/publicEndpoint.decorator';
+import { CustomSwaggerDecorator } from 'src/_decorators/setters/swagger.decorator';
 
 @ApiTags(POST_PATHS.PATH_PREFIX)
 @UseGuards(RolesGuard)
@@ -41,6 +43,11 @@ export class PostController {
   }
 
   // Get all posts
+  @CustomSwaggerDecorator({
+    summary: 'Get all posts',
+    statusOK: true,
+  })
+  @PublicEndpoint()
   @Get()
   public async getAllPosts(): Promise<IApiResponse<post[]>> {
     return {

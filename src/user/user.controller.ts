@@ -11,6 +11,7 @@ import { ZodSerializerDto } from 'nestjs-zod';
 import { GetUserByIdResponseDto } from 'src/_validators/user/user.dto';
 import { ALL_ROLES, CustomRole } from 'src/_decorators/setters/roles.decorator';
 import { RolesGuard } from 'src/_guards/roles.guard';
+import { PublicEndpoint } from 'src/_decorators/setters/publicEndpoint.decorator';
 
 @ApiTags(USER_PATHS.PATH_PREFIX)
 @UseGuards(RolesGuard)
@@ -20,10 +21,10 @@ export class UserController {
 
   // Get all users
   @CustomSwaggerDecorator({
-    authDec: true,
-    unauthDec: true,
+    summary: 'Get all users',
     statusOK: true,
   })
+  @PublicEndpoint()
   @Get()
   @CustomRole([ALL_ROLES.SUPER_ADMIN])
   public async getAllUsers(): Promise<IApiResponse<User[]>> {
@@ -35,6 +36,7 @@ export class UserController {
 
   // Get user by id
   @CustomSwaggerDecorator({
+    summary: 'Get user by id',
     paramDec: {
       paramName: 'id',
       paramSchema: GlobalIdParamDto.schema,
