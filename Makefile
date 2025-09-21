@@ -21,3 +21,6 @@ lint:
 
 docs:
 	pnpm run app:docs
+
+format:
+	pnpm run format
