@@ -26,7 +26,7 @@ export class UserController {
   })
   @PublicEndpoint()
   @Get()
-  @CustomRole([ALL_ROLES.SUPER_ADMIN])
+  // @CustomRole([ALL_ROLES.SUPER_ADMIN])
   public async getAllUsers(): Promise<IApiResponse<User[]>> {
     return {
       message: 'success',
@@ -53,6 +53,10 @@ export class UserController {
   public async getUserById(
     @Param() { id }: GlobalIdParamDto,
   ): Promise<IApiResponse<IGetUserByIdResponse | null>> {
+    console.log('getUserById', id);
+    console.log(`typeof id`, typeof id);
+    
+
     return {
       message: 'success',
       data: await this.userService.getUserById(id),
