@@ -55,7 +55,6 @@ export class UserController {
   ): Promise<IApiResponse<IGetUserByIdResponse | null>> {
     console.log('getUserById', id);
     console.log(`typeof id`, typeof id);
-    
 
     return {
       message: 'success',

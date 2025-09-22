@@ -35,7 +35,6 @@ export const nameSpacedJwtAndPassportConfig = registerAs(
   envConfigBasedOnMode.jwtAndPassport,
 );
 
-
 export const nameSpacedDatabaseConfig = registerAs(
   CONFIG_NAME_SPACED.DATABASE,
   envConfigBasedOnMode.database,
@@ -44,6 +43,11 @@ export const nameSpacedDatabaseConfig = registerAs(
 export const nameSpacedEmailConfig = registerAs(
   CONFIG_NAME_SPACED.EMAIL,
   envConfigBasedOnMode.email,
+);
+
+export const nameSpacedMinioConfig = registerAs(
+  CONFIG_NAME_SPACED.MINIO,
+  envConfigBasedOnMode.minio,
 );
 
 // Export constants for use in other modules

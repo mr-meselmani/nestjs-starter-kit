@@ -21,13 +21,14 @@ import { AUTH_PATHS } from './_paths/auth';
 import { OtpAndSecretModule } from './otp-and-secret/otp-and-secret.module';
 import { PostModule } from './post/post.module';
 import { ConfigModule } from '@nestjs/config';
-import { 
-  nameSpacedAppConfig, 
+import {
+  nameSpacedAppConfig,
   nameSpacedJwtAndPassportConfig,
   nameSpacedDatabaseConfig,
   nameSpacedEmailConfig,
 } from './_config';
 import { validateEnvironment } from './_utils/env-validation.util';
+import { MinioModule } from './minio/minio.module';
 
 @Module({
   imports: [
@@ -36,7 +37,7 @@ import { validateEnvironment } from './_utils/env-validation.util';
       isGlobal: true,
       // https://docs.nestjs.com/techniques/configuration#configuration-namespaces
       load: [
-        nameSpacedAppConfig, 
+        nameSpacedAppConfig,
         nameSpacedJwtAndPassportConfig,
         nameSpacedDatabaseConfig,
         nameSpacedEmailConfig,
@@ -52,6 +53,7 @@ import { validateEnvironment } from './_utils/env-validation.util';
     RefreshTokenModule,
     OtpAndSecretModule,
     PostModule,
+    MinioModule
   ],
   controllers: [AppController],
   providers: [

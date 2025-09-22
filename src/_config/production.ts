@@ -4,6 +4,7 @@ import {
   IJwtAndPassportEnvConfig,
   IDatabaseEnvConfig,
   IEmailEnvConfig,
+  IMinioEnvConfig,
 } from './types';
 
 const defaultExpiresIn = 604800;
@@ -36,5 +37,13 @@ export const productionModeEnv: IConfigNameSpacedEnvFactory = {
   email: (): IEmailEnvConfig => ({
     resendApiKey: process.env.RESEND_API_KEY!,
     mailerAddress: process.env.MAILER_ADDRESS!,
+  }),
+
+  minio: (): IMinioEnvConfig => ({
+    endPoint: process.env.MINIO_ENDPOINT!,
+    port: Number(process.env.MINIO_PORT) || 9000,
+    useSSL: process.env.MINIO_USE_SSL === 'true',
+    accessKey: process.env.MINIO_ACCESS_KEY!,
+    secretKey: process.env.MINIO_SECRET_KEY!,
   }),
 };

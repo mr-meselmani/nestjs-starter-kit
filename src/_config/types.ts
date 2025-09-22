@@ -8,6 +8,7 @@ export enum CONFIG_NAME_SPACED {
   JWT_AND_PASSPORT = 'jwtandpassportenv',
   DATABASE = 'databaseenv',
   EMAIL = 'emailenv',
+  MINIO = 'minioenv',
 }
 
 export enum CUSTOM_PROVIDERS_INJECTION_TOKENS {
@@ -32,7 +33,6 @@ export interface IJwtAndPassportEnvConfig {
   refreshTokenExpiresIn: number;
 }
 
-
 export interface IDatabaseEnvConfig {
   databaseUrl: string;
 }
@@ -42,9 +42,18 @@ export interface IEmailEnvConfig {
   mailerAddress: string;
 }
 
+export interface IMinioEnvConfig {
+  endPoint: string;
+  port: number;
+  useSSL: boolean;
+  accessKey: string;
+  secretKey: string;
+}
+
 export interface IConfigNameSpacedEnvFactory {
   app: () => IAppEnvConfig;
   jwtAndPassport: () => IJwtAndPassportEnvConfig;
   database: () => IDatabaseEnvConfig;
   email: () => IEmailEnvConfig;
+  minio: () => IMinioEnvConfig;
 }
