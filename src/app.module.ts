@@ -1,4 +1,5 @@
 import {
+  Logger,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -19,9 +20,30 @@ import { CheckEmailVerificationMiddleware } from './_middlewares/checkEmailVerif
 import { AUTH_PATHS } from './_paths/auth';
 import { OtpAndSecretModule } from './otp-and-secret/otp-and-secret.module';
 import { PostModule } from './post/post.module';
+import { ConfigModule } from '@nestjs/config';
+import { 
+  nameSpacedAppConfig, 
+  nameSpacedJwtAndPassportConfig,
+  nameSpacedDatabaseConfig,
+  nameSpacedEmailConfig,
+} from './_config';
+import { validateEnvironment } from './_utils/env-validation.util';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      expandVariables: true,
+      isGlobal: true,
+      // https://docs.nestjs.com/techniques/configuration#configuration-namespaces
+      load: [
+        nameSpacedAppConfig, 
+        nameSpacedJwtAndPassportConfig,
+        nameSpacedDatabaseConfig,
+        nameSpacedEmailConfig,
+      ],
+      envFilePath: [`.env.${process.env.NODE_ENV || 'development'}`, '.env'], // Try environment-specific first, then fallback to .env
+      validate: validateEnvironment,
+    }),
     PrismaModule,
     UserModule,
     AuthModule,
@@ -45,6 +67,12 @@ import { PostModule } from './post/post.module';
   ],
 })
 export class AppModule implements NestModule {
+  private readonly logger = new Logger(AppModule.name);
+
+  constructor() {
+    this.logger.log('✅ App module initialized with validated configuration');
+  }
+
   configure(consumer: MiddlewareConsumer): void {
     consumer.apply(CheckEmailVerificationMiddleware).forRoutes({
       path: `${AUTH_PATHS.PATH_PREFIX}/${AUTH_PATHS.POST_SEND_VERIFY_EMAIL_FOR_NEW_USER}`,
